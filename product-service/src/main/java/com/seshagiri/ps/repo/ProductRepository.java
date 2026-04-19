@@ -4,7 +4,9 @@ import org.springframework.data.jpa.repository.JpaRepository;
 
 import com.seshagiri.ps.entity.ProductEntity;
 
+import java.util.List;
+
 public interface ProductRepository extends JpaRepository<ProductEntity, Integer> {
 
-    public List<ProductEntity> findProductByName(String name);
+    //List<ProductEntity> findProductByName(String name);
 }
