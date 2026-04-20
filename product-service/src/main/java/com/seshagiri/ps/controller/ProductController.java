@@ -1,11 +1,6 @@
 package com.seshagiri.ps.controller;
 
-import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.web.bind.annotation.DeleteMapping;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RestController;
-import org.springframework.web.bind.annotation.RequestBody;
+import org.springframework.web.bind.annotation.*;
 
 import com.seshagiri.ps.entity.ProductEntity;
 import com.seshagiri.ps.service.ProductService;
@@ -18,11 +13,13 @@ public class ProductController {
 
     Logger logger = LoggerFactory.getLogger(ProductController.class);
 
+    private final ProductService productService;
+    private final OpenTelemetrySpan openTelemetrySpan;
 
-    private ProductService productService;
-    private OpenTelemetrySpan openTelemetrySpan;
 
-    public ProductController(ProductService productService, OpenTelemetrySpan openTelemetrySpan){
+
+    public ProductController(ProductService productService,
+                             OpenTelemetrySpan openTelemetrySpan){
         this.productService = productService;
         this.openTelemetrySpan = openTelemetrySpan;
     }
@@ -34,8 +31,21 @@ public class ProductController {
         logger.info("Creating a new product: {}", product);
         productService.createProduct(product);
         this.openTelemetrySpan.stopSpan();
+        logger.info("Product Controller span: {}", this.openTelemetrySpan);
         return "Product created successfully";
       }
+
+    @GetMapping()
+    public String getProduct() {
+        this.openTelemetrySpan.startSpan(ProductController.class.getName(),"createProduct",
+                "POST","WEB");
+        logger.info("Creating a new product: {}", "Hai");
+
+        this.openTelemetrySpan.stopSpan();
+        logger.info("Product Controller span: {}", this.openTelemetrySpan);
+        return "Product created successfully";
+    }
+
 
     @DeleteMapping("/delete")
     public String deleteProduct(@RequestBody ProductEntity product) {

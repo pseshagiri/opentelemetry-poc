@@ -7,18 +7,16 @@ import io.opentelemetry.sdk.resources.Resource;
 import io.opentelemetry.sdk.trace.SdkTracerProvider;
 import io.opentelemetry.sdk.trace.export.SimpleSpanProcessor;
 import io.opentelemetry.semconv.resource.attributes.ResourceAttributes;
-import org.springframework.beans.factory.annotation.Value;
-import org.springframework.context.annotation.Bean;
-import org.springframework.context.annotation.Configuration;
 
 
-@Configuration
+
+//@Configuration
 public class  OpentelemetryConfiguration {
 
-    @Value("${spring.servicename}")
-    private String serviceName;
+    //@Value("${spring.service.name}")
+    private String serviceName = "OpenTelemetry - library";
 
-    @Bean()
+    //@Bean()
     public OpenTelemetry openTelemetry(){
 
         Resource resource = Resource.getDefault().toBuilder()
