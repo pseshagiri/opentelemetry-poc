@@ -42,7 +42,7 @@ public class ProductController {
         logger.info("Creating a new product: {}", "Hai");
 
         this.openTelemetrySpan.stopSpan();
-        logger.info("Product Controller span: {}", this.openTelemetrySpan);
+        logger.info("Product Controller span: {}", this.openTelemetrySpan.toString());
         return "Product created successfully";
     }
 

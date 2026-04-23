@@ -12,7 +12,7 @@ import jakarta.persistence.Table;
 public class ProductEntity {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private Integer Id;
+    private Integer id;
     @Column(length = 100,name = "name")
     private String name;
     @Column(length = 255,name = "description")
@@ -21,16 +21,19 @@ public class ProductEntity {
     private Double price;
 
     public ProductEntity(Integer id, String name, String description, Double price) {
-        Id = id;
+        id = id;
         this.name = name;
         this.description = description;
         this.price = price;
     }
 
+    public ProductEntity() {
+
+    }
 
 
     public Integer getId() {
-        return Id;
+        return id;
     }
     public String getName() {
         return name;
@@ -42,7 +45,7 @@ public class ProductEntity {
         return price;
     }
     public void setId(Integer id) {
-        Id = id;
+        id = id;
     }
     public void setName(String name) {
         this.name = name;

@@ -1,0 +1,7 @@
+services:
+  product-service:
+    image: product-service:1.0
+    ports:
+    - "8080:8080"
+
+
